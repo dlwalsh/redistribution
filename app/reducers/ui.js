@@ -1,7 +1,7 @@
 import { DATA_LOADED, DATA_LOADING } from '../constants/ActionTypes';
 
 const initialState = {
-    loading: false
+    loaded: false
 };
 
 export default function ui(state = initialState, action) {
@@ -10,12 +10,12 @@ export default function ui(state = initialState, action) {
 
         case DATA_LOADED:
             return Object.assign({}, state, {
-                loading: false
+                loaded: true
             });
 
         case DATA_LOADING:
             return Object.assign({}, state, {
-                loading: true
+                loaded: false
             });
 
     }

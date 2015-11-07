@@ -11,6 +11,7 @@
   "dependencies": {
     "babel-core": "*",
     "babel-loader": "*",
+    "babel-plugin-syntax-object-rest-spread": "^6.0.14",
     "babel-plugin-transform-object-assign": "*",
     "babel-polyfill": "*",
     "babel-preset-es2015": "*",
@@ -26,6 +27,7 @@
     "node-sass": "*",
     "react": "*",
     "react-dom": "*",
+    "react-loader": "^2.0.0",
     "react-redux": "*",
     "react-select": "*",
     "redux": "*",

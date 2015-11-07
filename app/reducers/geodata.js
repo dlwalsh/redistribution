@@ -3,7 +3,7 @@ import { SET_LATEST_DATA, SET_LEGACY_DATA, SET_RELATIONSHIP_DATA } from '../cons
 const initialState = {
     latest: null,
     legacy: null,
-    relationship: null
+    relationships: null
 };
 
 export default function geodata(state = initialState, action) {
@@ -22,7 +22,7 @@ export default function geodata(state = initialState, action) {
 
         case SET_RELATIONSHIP_DATA:
             return Object.assign({}, state, {
-                relationship: action.data
+                relationships: action.data
             });
 
     }

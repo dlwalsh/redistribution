@@ -23,7 +23,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel?presets[]=es2015&presets[]=react&plugins[]=transform-object-assign'
+                loader: 'babel?presets[]=es2015&presets[]=react&plugins[]=transform-object-assign&plugins[]=syntax-object-rest-spread'
             },
             {
                 test: /\.css$/,
