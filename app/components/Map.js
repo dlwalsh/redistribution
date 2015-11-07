@@ -36,6 +36,10 @@ export default class Map extends Component {
 
         const { oldGeodata, geodata, selected, comparison } = this.props;
 
+        if (!geodata) {
+            return;
+        }
+
         if (typeof selected === 'number') {
 
             this.overlay1 = L.featureGroup([
@@ -50,24 +54,28 @@ export default class Map extends Component {
                 })
             ]);
 
-            this.control = L.control.layers({}, {}, { collapsed: false });
-
-            this.overlay2 = L.geoJson(oldGeodata, {
-                filter: (feature) => comparison.indexOf(feature.properties.id) > -1,
-                onEachFeature: (feature, layer) => this.control.addOverlay(layer, feature.properties.name),
-                style: {
-                    color: '#800000',
-                    opacity: 0.5,
-                    weight: 2,
-                    zIndex: 5
-                }
-            });
-
-            this.map
-                .addLayer(this.overlay1)
-                .addLayer(this.overlay2)
-                .addControl(this.control)
+            this.map.addLayer(this.overlay1)
                 .fitBounds(this.overlay1.getBounds());
+
+            if (oldGeodata && comparison) {
+
+                this.control = L.control.layers({}, {}, { collapsed: false });
+
+                this.overlay2 = L.geoJson(oldGeodata, {
+                    filter: (feature) => comparison.indexOf(feature.properties.id) > -1,
+                    onEachFeature: (feature, layer) => this.control.addOverlay(layer, feature.properties.name),
+                    style: {
+                        color: '#800000',
+                        opacity: 0.5,
+                        weight: 2,
+                        zIndex: 5
+                    }
+                });
+
+                this.map.addLayer(this.overlay2)
+                    .addControl(this.control);
+
+            }
 
         } else {
 

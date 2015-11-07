@@ -2,24 +2,23 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import UI from '../components/UI';
 import * as Actions from '../actions';
-import geodataNSWPre from '../data/nsw-pre.json';
-import geodataNSWPost from '../data/nsw-proposed.json';
-import transformNSW from '../data/nsw-transform.json';
 
-function mapStateToProps(state) {
+function mapStateToProps({ geodata, divisions, ui }) {
 
-    const selected = state.divisions.selected;
+    const selected = divisions.selected;
 
-    const comparison = transformNSW
-        .filter((pair) => pair.id === selected)
-        .reduce((array, pair) => [ ...array, ...pair.corresponding ], []);
+    const comparison = geodata.relationship
+        ? geodata.relationship
+            .filter((pair) => pair.id === selected)
+            .reduce((array, pair) => [ ...array, ...pair.corresponding ], [])
+        : null;
 
     return Object.assign({}, {
-        oldGeodata: geodataNSWPre,
-        geodata: geodataNSWPost,
-        transform: transformNSW,
+        oldGeodata: geodata.legacy,
+        geodata: geodata.latest,
         selected,
-        comparison
+        comparison,
+        loading: ui.loading
     });
 
 }

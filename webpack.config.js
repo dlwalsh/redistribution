@@ -1,47 +1,48 @@
 /*eslint-env node */
 
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
     entry: [
-        'webpack-hot-middleware/client',
         './app/index.js',
     ],
     output: {
         filename: 'bundle.js',
-        path: 'dist'
+        path: path.join(__dirname, 'dist'),
+        publicPath: '/js/'
     },
     module: {
         preLoaders: [
             {
                 test: /\.json$/,
-                loader: 'json-loader'
+                loader: 'json'
             }
         ],
         loaders: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    stage: '0'
-                }
+                loader: 'babel?presets[]=es2015&presets[]=react&plugins[]=transform-object-assign'
             },
             {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader'
+                loader: 'style!css'
             },
             {
                 test: /\.scss$/,
-                loader: 'style-loader!css-loader!sass-loader'
+                loader: 'style!css!sass'
             },
             {
                 test: /\.(png|jpg)$/,
-                loader: 'url-loader?limit=8192'// inline base64 URLs for <=8k images, direct URLs for the rest
+                loader: 'url?limit=8192'// inline base64 URLs for <=8k images, direct URLs for the rest
             }
         ]
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ]
