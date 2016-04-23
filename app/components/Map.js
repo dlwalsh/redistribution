@@ -44,7 +44,7 @@ export default class Map extends Component {
 
             this.overlay1 = L.featureGroup([
                 L.geoJson(geodata, {
-                    filter: (feature) => feature.properties.id === selected,
+                    filter: (feature) => feature.properties.E_div_numb === selected,
                     style: {
                         color: '#000080',
                         opacity: 0.5,

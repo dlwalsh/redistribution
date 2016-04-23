@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IN_DIR="$HOME/Documents/Geodata"
-OUT_DIR="$HOME/Development/electoral/app/data"
+OUT_DIR="$HOME/Development/redistribution/app/data"
 
 function convert {
 

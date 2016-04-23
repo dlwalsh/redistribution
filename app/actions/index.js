@@ -58,7 +58,7 @@ export function loadData() {
             fetchData('/data/nsw-pre.json').then((data) =>
                 dispatch(setLegacyData(data))
             ),
-            fetchData('/data/nsw-proposed.json').then((data) =>
+            fetchData('/data/nsw-final.json').then((data) =>
                 dispatch(setLatestData(data))
             ),
             fetchData('/data/nsw-transform.json').then((data) =>

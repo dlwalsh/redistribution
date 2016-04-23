@@ -28,9 +28,9 @@
     "react": "*",
     "react-dom": "*",
     "react-loader": "^2.0.0",
-    "react-redux": "*",
+    "react-redux": "^4.0.0",
     "react-select": "*",
-    "redux": "*",
+    "redux": "^3.0.4",
     "redux-logger": "*",
     "redux-thunk": "*",
     "sass-loader": "*",
@@ -46,5 +46,8 @@
   "engines": {
     "node": ">=4.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^2.8.0",
+    "eslint-plugin-react": "^5.0.1"
+  }
 }

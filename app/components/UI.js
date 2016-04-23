@@ -11,8 +11,8 @@ export default function UI({
 }) {
 
     const options = geodata ? geodata.features.map((feature) => ({
-        label: feature.properties.name,
-        value: feature.properties.id
+        label: feature.properties.Elect_div,
+        value: feature.properties.E_div_numb
     })) : [];
 
     return (
