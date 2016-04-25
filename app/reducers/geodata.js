@@ -1,32 +1,20 @@
-import { SET_LATEST_DATA, SET_LEGACY_DATA, SET_RELATIONSHIP_DATA } from '../constants/ActionTypes';
+import topojson from 'topojson';
+import { SET_GEODATA } from '../constants/ActionTypes';
 
 const initialState = {
-    latest: null,
-    legacy: null,
-    relationships: null
+  latest: null,
+  legacy: null,
 };
 
 export default function geodata(state = initialState, action) {
+  switch (action.type) {
+    case SET_GEODATA:
+      return Object.assign({}, state, {
+        latest: topojson.feature(action.data, action.data.objects.new),
+        legacy: topojson.feature(action.data, action.data.objects.old),
+      });
+    default:
+  }
 
-    switch (action.type) {
-
-        case SET_LATEST_DATA:
-            return Object.assign({}, state, {
-                latest: action.data
-            });
-
-        case SET_LEGACY_DATA:
-            return Object.assign({}, state, {
-                legacy: action.data
-            });
-
-        case SET_RELATIONSHIP_DATA:
-            return Object.assign({}, state, {
-                relationships: action.data
-            });
-
-    }
-
-    return state;
-
+  return state;
 }

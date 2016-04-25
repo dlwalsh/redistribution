@@ -1,25 +1,21 @@
-import { DATA_LOADED, DATA_LOADING } from '../constants/ActionTypes';
+import { DATA_LOADING, SET_GEODATA } from '../constants/ActionTypes';
 
 const initialState = {
-    loaded: false
+  loaded: false,
 };
 
 export default function ui(state = initialState, action) {
+  switch (action.type) {
+    case DATA_LOADING:
+      return Object.assign({}, state, {
+        loaded: false,
+      });
+    case SET_GEODATA:
+      return Object.assign({}, state, {
+        loaded: true,
+      });
+    default:
+  }
 
-    switch (action.type) {
-
-        case DATA_LOADED:
-            return Object.assign({}, state, {
-                loaded: true
-            });
-
-        case DATA_LOADING:
-            return Object.assign({}, state, {
-                loaded: false
-            });
-
-    }
-
-    return state;
-
+  return state;
 }
