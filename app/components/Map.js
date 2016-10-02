@@ -58,8 +58,9 @@ export default class Map extends Component {
 
         this.overlay2 = L.geoJson(oldGeodata, {
           filter: (feature) => feature.properties.overlap.includes(selected),
-          onEachFeature: (feature, layer) =>
-            this.control.addOverlay(layer, feature.properties.name),
+          onEachFeature: (feature, layer) => {
+            this.control.addOverlay(layer, feature.properties.name);
+          },
           style: {
             color: '#800000',
             opacity: 0.5,

@@ -11,7 +11,7 @@ export default function UI({
   const options = geodata ? geodata.features.map((feature) => ({
     label: feature.properties.name,
     value: feature.properties.id,
-  })) : [];
+  })).sort((a, b) => a.label.localeCompare(b.label)) : [];
 
   return (
     <div className="ui">

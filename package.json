@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "eslint": "eslint app",
+    "eslint:fix": "eslint --fix app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Walsh",
@@ -53,6 +55,7 @@
     "eslint-plugin-jsx-a11y": "^1.0.2",
     "eslint-plugin-react": "^5.0.1",
     "mapshaper": "^0.3.20",
+    "minimist": "^1.2.0",
     "topojson": "^1.6.24"
   }
 }

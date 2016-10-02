@@ -1,11 +1,17 @@
 const mapshaper = require('mapshaper');
 const fs = require('fs');
-const path = require('path');
+const minimist = require('minimist');
 
-const inFileOld = '/Users/david/Documents/Geodata/Federal/NSW_2008/final/NSW_ELB_region.shp';
-const inFileNew = '/Users/david/Documents/Geodata/Federal/NSW_2014/final/' +
-  'NSW_electoral_boundaries_25-02-2016.shp';
-const outFile = '/Users/david/Development/redistribution/app/data/nsw.json';
+const argv = minimist(process.argv.slice(2));
+
+const inFileOld = argv.in1;
+const inFileNew = argv.in2;
+const idField1 = argv.idField1;
+const idField2 = argv.idField2;
+const nameField1 = argv.nameField1;
+const nameField2 = argv.nameField2;
+const pairFile = argv.pairs;
+const outFile = argv.out;
 
 function propertiesExpression(args) {
   const idField = args.idField;
@@ -18,7 +24,7 @@ function propertiesExpression(args) {
   }`;
 }
 
-fs.readFile(path.resolve(__dirname, '../pairs/nsw2014.txt'), 'utf8', (error, content) => {
+fs.readFile(pairFile, 'utf8', (error, content) => {
   if (error) {
     throw error;
   }
@@ -46,24 +52,24 @@ fs.readFile(path.resolve(__dirname, '../pairs/nsw2014.txt'), 'utf8', (error, con
   }, {});
 
   const oldEach = propertiesExpression({
-    idField: 'DIV_NUMBER',
-    nameField: 'ELECT_DIV',
+    idField: idField1,
+    nameField: nameField1,
     overlaps: overlapOld,
   });
 
   const newEach = propertiesExpression({
-    idField: 'E_div_numb',
-    nameField: 'Elect_div',
+    idField: idField2,
+    nameField: nameField2,
     overlaps: overlapNew,
   });
 
   mapshaper.runCommands(`
     -i ${inFileOld} ${inFileNew} combine-files
-    -simplify 0.1
+    -simplify 0.15
     -rename-layers old,new
-    -clip bbox=113,-44,154,-9
     -each '${oldEach}' target=old
     -each '${newEach}' target=new
+    -clip bbox=113,-44,154,-9
     -o force format=topojson ${outFile}
   `, (err) => {
     if (err) {

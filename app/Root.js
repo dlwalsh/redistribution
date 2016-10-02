@@ -7,8 +7,12 @@ import { loadData } from './actions';
 const store = configureStore();
 store.dispatch(loadData());
 
-export default () => (
+function Root() {
+  return (
     <Provider store={store}>
-        <App />
+      <App />
     </Provider>
-);
+  );
+}
+
+export default Root;
